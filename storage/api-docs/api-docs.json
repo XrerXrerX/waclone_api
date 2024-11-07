@@ -1,0 +1,1116 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Whatsapp Clone OpenAPI Documentation",
+        "description": "API Documentation for wa-clone",
+        "contact": {
+            "email": "lintasinovasiglobal@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User Login/sign-in",
+                "operationId": "e04ad83c9639d3907d13af041fe1ac9e",
+                "parameters": [
+                    {
+                        "name": "tokenValidation",
+                        "in": "header",
+                        "description": "Put your given token on header tokenValidation",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5ljrZQkAxtHpEjKfTRKblN7IwFU9sSyO"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "admin@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "Superadmin111!!!"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Login successful"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "superadmin"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "admin@gmail.com"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-11-05T13:40:13.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-11-05T13:40:13.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "<RANDOM_INTEGER>|<RANDOM_TOKEN>"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized: Either the token is invalid, or the username/password is incorrect.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Fail"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Invalid username or password"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User Register",
+                "operationId": "7f3dfd4722b65784143fe05d399f40c3",
+                "parameters": [
+                    {
+                        "name": "tokenValidation",
+                        "in": "header",
+                        "description": "Put your given token on header tokenValidation. Ensure that 'email' are unique when registering a new user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5ljrZQkAxtHpEjKfTRKblN7IwFU9sSyO"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "<unique-user>"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "<unique-email>@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "<password>"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Register Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User registered successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "<your-unique-user>"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "<your-unique-email>@gmail.com"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-11-05T13:40:13.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-11-05T13:40:13.000000Z"
+                                                },
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "<ID>"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "<RANDOM_INTEGER>|<RANDOM_TOKEN>"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized: Token invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error: email is invalid or email already been registered",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Fail"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Registration failed"
+                                                },
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "The email has already been taken."
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Fail"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Registration failed"
+                                                },
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "The email field must be a valid email address."
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User Logout/sign-out",
+                "operationId": "564015a72ce4598bc5905ce8a25cb0ba",
+                "parameters": [
+                    {
+                        "name": "tokenValidation",
+                        "in": "header",
+                        "description": "Put your given token on header tokenValidation",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5ljrZQkAxtHpEjKfTRKblN7IwFU9sSyO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logout Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logout successful"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized: Token invalid, or user already logout.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Fail"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Error"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "You are not Authenticated"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Unauthenticated"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/allchatrooms": {
+            "get": {
+                "tags": [
+                    "Chatroom"
+                ],
+                "summary": "Show available chatrooms",
+                "operationId": "b347492edb558172eed28b64fed36194",
+                "parameters": [
+                    {
+                        "name": "tokenValidation",
+                        "in": "header",
+                        "description": "Put your given token on header tokenValidation",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5ljrZQkAxtHpEjKfTRKblN7IwFU9sSyO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Showing all the available chatrooms without authorization or authentication",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Fetched successfully"
+                                        },
+                                        "user": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "owner_id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "<CHATROOM_NAME>"
+                                                    },
+                                                    "members": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "example": [
+                                                            2,
+                                                            3,
+                                                            4,
+                                                            1,
+                                                            5
+                                                        ]
+                                                    },
+                                                    "max_members": {
+                                                        "type": "integer",
+                                                        "example": 10
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2024-11-05T13:40:13.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2024-11-05T13:40:13.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "owner_id": 2,
+                                                    "name": "chatroom-001",
+                                                    "members": [
+                                                        1,
+                                                        2,
+                                                        3,
+                                                        4,
+                                                        5
+                                                    ],
+                                                    "max_members": 10,
+                                                    "created_at": "2024-11-05T13:40:13.000000Z",
+                                                    "updated_at": "2024-11-05T13:40:13.000000Z"
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "owner_id": 2,
+                                                    "name": "chatroom-001",
+                                                    "members": [
+                                                        2,
+                                                        5,
+                                                        6
+                                                    ],
+                                                    "max_members": 3,
+                                                    "created_at": "2024-11-05T13:40:13.000000Z",
+                                                    "updated_at": "2024-11-05T13:40:13.000000Z"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/listuser": {
+            "get": {
+                "tags": [
+                    "Chatroom"
+                ],
+                "summary": "Show list user that also online",
+                "operationId": "1c4cf2529f5bdda29f85f64c422e10e9",
+                "parameters": [
+                    {
+                        "name": "tokenValidation",
+                        "in": "header",
+                        "description": "Put your given token on header tokenValidation",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5ljrZQkAxtHpEjKfTRKblN7IwFU9sSyO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show list other user success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Fetch successfully."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "superadmin"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "admin@gmail.com"
+                                                    },
+                                                    "email_verified_at": {
+                                                        "type": "string",
+                                                        "example": null,
+                                                        "nullable": true
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2024-11-06T12:20:50.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2024-11-06T12:20:50.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "name": "newUser001",
+                                                    "email": "newUser001@gmail.com",
+                                                    "email_verified_at": null,
+                                                    "created_at": "2024-11-06T12:20:50.000000Z",
+                                                    "updated_at": "2024-11-06T12:20:50.000000Z"
+                                                },
+                                                {
+                                                    "id": 3,
+                                                    "name": "newUser002",
+                                                    "email": "newUser002@gmail.com",
+                                                    "email_verified_at": null,
+                                                    "created_at": "2024-11-06T12:28:44.000000Z",
+                                                    "updated_at": "2024-11-06T12:28:44.000000Z"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized: Either the token is invalid, or user already logout.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Fail"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Error"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "You are not Authenticated"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Unauthenticated"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/chatrooms": {
+            "get": {
+                "tags": [
+                    "Chatroom"
+                ],
+                "summary": "Show Chatroom available",
+                "operationId": "cc93a036f9d5d11d86782a97626e5f80",
+                "parameters": [
+                    {
+                        "name": "tokenValidation",
+                        "in": "header",
+                        "description": "Put your given token on header tokenValidation",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5ljrZQkAxtHpEjKfTRKblN7IwFU9sSyO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Check again later for this path naming and functionality",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Fetched successfully"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "dedaunan"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "dedaunan@gmail.com"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-11-05T13:40:13.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-11-05T13:40:13.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized: Either the token is invalid, or user already logout.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Fail"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "Error"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "You are not Authenticated"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Unauthenticated"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chatroom"
+                ],
+                "summary": "Create Chatrooms",
+                "operationId": "c4330783bf17925c0182a741422e0fa7",
+                "parameters": [
+                    {
+                        "name": "tokenValidation",
+                        "in": "header",
+                        "description": "Put your given token on header tokenValidation",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5ljrZQkAxtHpEjKfTRKblN7IwFU9sSyO"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "<CHATROOM_NAME>"
+                                    },
+                                    "max_members": {
+                                        "type": "integer",
+                                        "example": 5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Integer that shows on the chatroom.members is member who already joined the chatroom, for example your id is 20, then the chatroom.member [20] your id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Chatroom created successfully"
+                                        },
+                                        "chatroom": {
+                                            "properties": {
+                                                "owner_id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "<CHATROOM_NAME>"
+                                                },
+                                                "members": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    }
+                                                },
+                                                "max_members": {
+                                                    "type": "integer",
+                                                    "example": 5
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-11-05T13:40:13.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-11-05T13:40:13.000000Z"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to create chatroom, input field 'name' is required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to create chatroom"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "The name field is required"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/messages": {
+            "post": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "Send messages, include media",
+                "operationId": "uploadImage",
+                "parameters": [
+                    {
+                        "name": "tokenValidation",
+                        "in": "header",
+                        "description": "Put your given token on header tokenValidation",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5ljrZQkAxtHpEjKfTRKblN7IwFU9sSyO"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "attachment_url",
+                                    "chatroom_id"
+                                ],
+                                "properties": {
+                                    "attachment_url": {
+                                        "description": "Image file to upload",
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "chatroom_id": {
+                                        "description": "Choose which chatroom_id you want to send message",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Image uploaded successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://example.com/uploads/image.jpg"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/messages/{chatroom_id}": {
+            "get": {
+                "tags": [
+                    "Chatroom"
+                ],
+                "summary": "Go to Chatroom by route {chatroom_id}",
+                "operationId": "28045d78b50f610c76eba7f54f9faa54",
+                "parameters": [
+                    {
+                        "name": "tokenValidation",
+                        "in": "header",
+                        "description": "Put your given token on header tokenValidation",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5ljrZQkAxtHpEjKfTRKblN7IwFU9sSyO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Fetch chatroom data successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Fetch successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "chatroom_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "sender_id": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "user001"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "example": "user001@gmail.com"
+                                                            },
+                                                            "email_verified_at": {
+                                                                "type": "string",
+                                                                "example": null,
+                                                                "nullable": true
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "example": "2024-11-06T12:20:50.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "example": "2024-11-06T12:20:50.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "message_text": {
+                                                        "type": "string",
+                                                        "example": null,
+                                                        "nullable": true
+                                                    },
+                                                    "attachment_url": {
+                                                        "type": "string",
+                                                        "example": null,
+                                                        "nullable": true
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2024-11-06T12:20:50.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2024-11-06T12:20:50.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Authentication"
+        },
+        {
+            "name": "Chatroom",
+            "description": "Chatroom"
+        },
+        {
+            "name": "Message",
+            "description": "Message"
+        }
+    ]
+}
